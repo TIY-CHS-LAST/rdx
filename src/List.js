@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import Item from './Item'
 export default class List extends Component {
-  componentDidMount = () => {
+  componentWillMount(nextProps) {
+    console.log('NEXTPROPS', nextProps);
     this.props.actions.fetchCats()
   }
   render = () => {
-    const { cats } = this.props
+    const { cats, isPending } = this.props
     console.log('props', this.props);
     return (
       <div>
-      {cats && cats.length
-        ? cats.map(item => <Item key={item.id} cat={item} />)
-        : null
+      {!isPending
+        ? cats.map(item => <Item key={item.id} actions={this.props.actions} cat={item} />)
+        : <h1>no cats, OKAY!!!??</h1>
       }
       </div>
     )

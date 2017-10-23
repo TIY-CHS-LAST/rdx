@@ -1,6 +1,22 @@
 import { GET_CATS_IF_NOT_FETCHED, RECEIVE_CATS } from './constants'
-import { getCats } from './services'
-
+import { getCats, deleteCat } from './services'
+// import catsMock from './dummyCat'
+//
+// export function fetchCatsMock () {
+//   return function (dispatch) {
+//     dispatch(receiveCats(catsMock))
+//   }
+// }
+//
+// export function deleteACatMock (catId) {
+//   return function (dispatch) {
+//     const newCats = catsMock.filter(function (cat) {
+//       return cat.id !== catId
+//     })
+//     dispatch(receiveCats(newCats))
+//   }
+// }
+//
 export function fetchCats () {
   return function (dispatch) {
     // before we go to server, go ahead and make call pending
@@ -12,6 +28,14 @@ export function fetchCats () {
   }
 }
 
+export function deleteACat (catId) {
+  return function (dispatch) {
+    return deleteCat(catId).then(res => {
+      // dispatch
+      console.log(res)
+    })
+  }
+}
 export function receiveCats (cats) {
   return { type: RECEIVE_CATS, cats }
 }

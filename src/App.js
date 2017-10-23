@@ -10,7 +10,7 @@ const App = ({ cats, actions, ...rest }) => {
 }
 
 const mapStateToProps = state => {
-  return { cats: state.catReducer.cats }
+  return { cats: state.catReducer.cats, isPending: state.catReducer.isPending }
 }
 
 const mapDispatchToProps = dispatch => {
